@@ -1,0 +1,22 @@
+{
+	"name" : "qpfsoft/deunit",
+	"description" : "Debug Unit",
+	"keywords" : [
+		"deunit"
+	],
+	"license" : "Apache-2.0",
+	"authors" : [{
+			"name" : "qiun",
+			"email" : "qiun@163.com"
+		}
+	],
+	"minimum-stability" : "dev",
+	"require" : {
+		"php" : ">=7.1.0"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"qpf\\deunit\\" : "src/"
+		}
+	}
+}
