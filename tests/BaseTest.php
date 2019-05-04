@@ -24,6 +24,26 @@ class BaseTest extends TestUnit
     {
         return $this->beTrue(1);
     }
+    
+    public function testFunc5()
+    {
+        return ['static' => 'ok'];
+    }
+    
+    public function testFunc6()
+    {
+        return 'ok';
+    }
+    
+    public function testFunc7()
+    {
+        return 1;
+    }
+    
+    public function testFunc8()
+    {
+        return 0;
+    }
 }
 
 
