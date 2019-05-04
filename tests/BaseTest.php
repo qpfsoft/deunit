@@ -5,6 +5,7 @@ include 'boot.php';
 
 class BaseTest extends TestUnit
 {
+
     public function testFunc1()
     {
         return $this->beTrue(1);
@@ -44,10 +45,13 @@ class BaseTest extends TestUnit
     {
         return 0;
     }
+    
+    public function testFunc9()
+    {
+        throw new \Exception('params missing');
+    }
 }
 
 
-$test = new BaseTest();
-
-var_export($test->runTestUnit());
+var_export(BaseTest::runTestUnit());
 

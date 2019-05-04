@@ -17,6 +17,8 @@ class Results
             return new TrueResult();
         } elseif ($result === false) {
             return new FalseResult();
+        } elseif ($result instanceof \Exception) {
+            return new ExceptionResult($result);
         } else {
             return new ShowResult($result);
         }

@@ -20,7 +20,7 @@ abstract class TestUnit
     use ValueTrait;
     
     /**
-     * 测试开始回调方法
+     * 建立 - 测试开始回调方法
      */
     public function setUp()
     {
@@ -28,7 +28,7 @@ abstract class TestUnit
     }
     
     /**
-     * 测试结束回调方法
+     * 拆除 - 测试结束回调方法
      */
     public function tearDown()
     {
@@ -43,9 +43,13 @@ abstract class TestUnit
      */
     final public static function runTestUnit($throw = false)
     {
-        $object = new static();
+        try {
+            $object = new static();
+        } catch (\Throwable $e) {
+            return ['class' => static::class, 'exception' => $e->getMessage()];
+        }
+
         $reclass = new \ReflectionClass($object);
-        
         // 公共方法
         $methods = $reclass->getMethods(\ReflectionMethod::IS_PUBLIC);
         
@@ -64,8 +68,14 @@ abstract class TestUnit
                 continue;
             }
             
+            try {
+                $result = $method->invoke($object);
+            } catch (\Throwable $e) {
+                $result = $e;
+            }
+            
             // 解析结果
-            $results[$name] = Results::parse($method->invoke($object));
+            $results[$name] = Results::parse($result);
             
             // 失败终止
             if ($throw && $results[$name] instanceof FalseResult) {
