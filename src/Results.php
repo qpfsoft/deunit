@@ -7,6 +7,17 @@ namespace qpf\deunit;
 class Results
 {
     /**
+     * 标识成功结果
+     * @var string
+     */
+    const SUCCESS = '__ok__';
+    /**
+     * 标识失败结果
+     * @var string
+     */
+    const FAILURE = '__error__';
+    
+    /**
      * 解析单元测试结果
      * @param mixed $result
      * @return TrueResult|FalseResult|ShowResult
@@ -50,8 +61,14 @@ class Results
     {
         $info['count'] = count($results);
         $assess = $assess ?: self::assess($results);
-        $info['pass'] = round($assess['__ok__'] / $info['count'] * 100) . '%';
-        $info['fail'] = round($assess['__error__'] / $info['count'] * 100) . '%';
+
+        $info['pass'] = (isset($assess[self::SUCCESS]) ?
+            round($assess[self::SUCCESS] / $info['count'] * 100) : 0) . '%';
+        
+        $info['fail'] = (isset($assess[self::FAILURE]) ? 
+            round($assess[self::FAILURE] / $info['count'] * 100) : 0) . '%';
+
+
         $info['info'] = [];
         
         foreach ($results as $method => $result) {
