@@ -70,7 +70,7 @@ class Results
 
 
         $info['info'] = [];
-        echor($results);
+
         foreach ($results as $method => $result) {
             if ($result instanceof ResultInterface) {
                 $info['info'][$method] = $result->result;
