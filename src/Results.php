@@ -28,7 +28,7 @@ class Results
             return new TrueResult();
         } elseif ($result === false) {
             return new FalseResult();
-        } elseif ($result instanceof \Exception) {
+        } elseif ($result instanceof \Throwable) {
             return new ExceptionResult($result);
         } else {
             return new ShowResult($result);
@@ -70,7 +70,7 @@ class Results
 
 
         $info['info'] = [];
-        
+        echor($results);
         foreach ($results as $method => $result) {
             if ($result instanceof ResultInterface) {
                 $info['info'][$method] = $result->result;

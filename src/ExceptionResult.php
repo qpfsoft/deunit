@@ -16,9 +16,14 @@ class ExceptionResult extends FalseResult
      * 构造函数
      * @param \Exception $e
      */
-    public function __construct(\Exception $e)
+    public function __construct(\Throwable $e)
     {
         $this->excetion = $e;
-        $this->result = $e->getMessage();
+        $this->result = [
+            'catch'     => 'Exception - ' . get_class($e),
+            'message'   => $e->getMessage(),
+            'file'      => $e->getFile(),
+            'line'      => $e->getLine(),
+        ];
     }
 }
