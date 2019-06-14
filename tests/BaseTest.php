@@ -3,6 +3,9 @@ use qpf\deunit\TestUnit;
 
 include 'boot.php';
 
+/**
+ * 测试结果
+ */
 class BaseTest extends TestUnit
 {
 
@@ -18,7 +21,7 @@ class BaseTest extends TestUnit
     
     public function testFunc3()
     {
-        return $this->isTrue(0);
+        return $this->isTrue(0); // false
     }
     
     public function testFunc4()
@@ -48,7 +51,7 @@ class BaseTest extends TestUnit
     
     public function testFunc9()
     {
-        throw new \Exception('params missing');
+        throw new \Exception('params missing'); // error
     }
 }
 

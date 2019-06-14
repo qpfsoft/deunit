@@ -34,6 +34,33 @@ abstract class TestUnit
     {
         
     }
+    
+    /**
+     * 运行方法测试
+     * @param string $method 方法名称
+     * @param array $params 调用传入参数
+     * @throws \Exception
+     * @return mixed
+     */
+    final public static function runTestMethod($method, array $params = [])
+    {
+        try {
+            $object = new static();
+        } catch (\Throwable $e) {
+            return ['class' => static::class, 'exception' => $e->getMessage()];
+        }
+
+        if (method_exists($object, $method)) {
+            try {
+                return $result = call_user_func_array([$object, $method], $params);
+            } catch (\Throwable $e) {
+                $result = $e;
+            }
+            return Results::parse($result);
+        } else {
+            throw new \Exception('method does not exist ');
+        }
+    }
 
     /**
      * 运行单元测试
